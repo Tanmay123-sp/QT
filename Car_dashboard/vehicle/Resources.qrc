@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../Downloads/speed.jpg</file>
+        <file>../Downloads/Green_Arrow_Left.svg</file>
+        <file>../Downloads/Green_Arrow_Right.svg.png</file>
+    </qresource>
+</RCC>
