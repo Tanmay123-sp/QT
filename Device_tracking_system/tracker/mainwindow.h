@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include<map>
+#include<QMap>
 #include<QString>
 #include<QFileDialog>
 #include<QPdfWriter>
@@ -27,31 +27,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-   // map<QString,pair<QString,pair<QString,pair<QString,QString>>>>trackMap;
     void showCity();
-    // QTimer *timer=new QTimer(this);
-    // QTimer *timer1=new QTimer(this);
-    // QColor currentColor = Qt::green;
-    //void setTimer(QTimer *newTimer);
-    // Dialog *d;
-
 
 private slots:
     void on_saveButton_clicked();
-
     void on_imageButton_clicked();
-
     void on_downloadButton_clicked();
-
     void generatePdf();
-
     void updateMapHelper(QVector<QString> data);
-    // void timerfun();
-
-    // void newWindow();
-
-    // void timerfun1();
-
     void on_pushButton_2_clicked();
 
 signals:

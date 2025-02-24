@@ -8,15 +8,10 @@ Dialog::Dialog(Details1& obj,QWidget *parent)
 
 {
     ui->setupUi(this);
+    setWindowTitle("pdf generator");
     vec1 = dobj.exportCombo();
     updateCombo();
 }
-
-// Dialog::Dialog(Details1& obj):dobj(obj){
-//     vec1 = dobj.exportCombo();
-//     updateCombo();
-// }
-
 
 Dialog::~Dialog()
 {
@@ -28,7 +23,6 @@ void Dialog::updateCombo()
     qDebug()<<"gfgdfgfggfg";
     for(auto it:vec1)
     {
-
         ui->comboBox->addItem(it);
     }
 }

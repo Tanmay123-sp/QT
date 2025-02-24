@@ -1,6 +1,6 @@
 #include<gtest/gtest.h>
 #include"../dataProvider/dataprovider1.h"
-#include"../mainwindow.h"
+#include"mainwindow.h"
 #include"user.h"
 #include<QSignalSpy>
 using namespace::testing;

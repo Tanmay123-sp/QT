@@ -12,7 +12,6 @@ Dialog::Dialog(map<QString,pair<int,map<QString,int>>>&bookMap, map<QString,bool
     ui->setupUi(this);
     connect(ui->radioButtonTech, &QRadioButton::clicked, this, &Dialog::on_radioButtonTech_clicked);
     connect(ui->radioButtonNonTech, &QRadioButton::clicked, this, &Dialog::on_radioButtonNonTech_clicked);
-
 }
 
 Dialog::~Dialog()

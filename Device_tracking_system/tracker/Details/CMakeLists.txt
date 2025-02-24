@@ -5,10 +5,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql REQUIRED)
 
 # Define the details1 library target
 add_library(Details SHARED
-
-
     details1.h details1.cpp
-
 )
 
 # Link the details1 library against Qt Core

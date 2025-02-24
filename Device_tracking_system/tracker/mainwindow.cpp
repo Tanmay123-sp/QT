@@ -14,17 +14,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-   // QString deviceName = ui->deviceNameT->text();
+    // QString deviceName = ui->deviceNameT->text();
     connect(ui->downloadButton, &QPushButton::clicked, this, &MainWindow::generatePdf);
     showCity();
-     connect(this, &MainWindow::updateMap, data, &Details1::setMap);
+    connect(this, &MainWindow::updateMap, data, &Details1::setMap);
     data->exportData();
-    //connect(this, SIGNAL(update()), data, SLOT(dummy()));
-     // connect(timer,SIGNAL(timeout()), this,SLOT(timerfun()));
-  // timer->start(2000);
-
-    //connect(ui->pushButton,&QPushButton::clicked,this,&MainWindow::newWindow);
-
 }
 
 MainWindow::~MainWindow()
@@ -36,44 +30,6 @@ void MainWindow::updateMapHelper(QVector<QString> data){
     qDebug() <<"Hellooooooo";
 }
 
-// void MainWindow::timerfun()
-// {
-
-//     static int colorIndex = 0;
-//     QColor color;
-//     switch (colorIndex) {
-//     case 0:
-//         color = Qt::green;
-//         break;
-//     case 1:
-//         color = Qt::red;
-//         break;
-//     case 2:
-//         color = Qt::blue;
-//         break;
-//     default:
-//         colorIndex = 0;
-//         color = Qt::green;
-//         break;
-//     }
-//     setStyleSheet(QString("background-color: %1;").arg(color.name()));
-//     colorIndex++;
-// }
-
-// void MainWindow::newWindow()
-// {
-//     d= new Dialog();
-//     d->show();
-//     connect(timer1,SIGNAL(timeout()),this,SLOT(timerfun1()));
-//     timer1->start(2000);
-// }
-// void MainWindow::timerfun1()
-// {
-//     d->close();
-// }
-
-
-
 void MainWindow::on_saveButton_clicked()
 {
     QString deviceName = ui->deviceNameT->toPlainText();
@@ -83,13 +39,6 @@ void MainWindow::on_saveButton_clicked()
     QString img =ui->imageButton->text();
 
     emit updateMap({deviceName,serialNo,assign,location,img});
-
-    // trackMap={
-    //     {deviceName,
-    //       {serialNo,
-    //          {assign,
-    //            {location,img}
-    //       }}}};
 }
 
 void MainWindow::on_imageButton_clicked()
@@ -104,7 +53,6 @@ void MainWindow::on_imageButton_clicked()
         ui->imageButton->setText(justFileName);
     }
 }
-
 
 void MainWindow::on_downloadButton_clicked()
 {
@@ -124,42 +72,46 @@ void MainWindow::generatePdf() {
     painter.begin(&printer);
 
     // Start drawing on the PDF
-    painter.drawText(100, 100, "Data:");
+    painter.drawText(80, 80, "Data:");
 
-    int y = 150;
+    int y = 100;
     QString deviceName = ui->deviceNameT->toPlainText();
     for (const auto &pair : data->trackMap[deviceName]) {
-        QString text = deviceName + "\n" + pair.first + "\n" + pair.second.first + "\n" + pair.second.second.first + "\n";
+        QString text = deviceName;
+        QString text2 = pair.first;
+        QString text3 = pair.second.first;
+        QString text4 = pair.second.second.first;
         painter.drawText(100, y, text);
-        y += 50;
-        qDebug() << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"<<filenameFullPath;
+        painter.drawText(100,y+20,text2);
+        painter.drawText(100,y+40,text3);
+        painter.drawText(100,y+60,text4);
+        qDebug()<<"xxxxxxxxxxxx"<<filenameFullPath;
         // Draw the uploaded image if it exists
         if (!filenameFullPath.isEmpty()) {
             QImage image(filenameFullPath);
             qDebug() << pair.second.second.second;
             qDebug() << image;
             if (!image.isNull()) {
-                painter.drawImage(100, y, image);
-                y += image.height() + 20; // Adjust spacing after the image
+                int newWidth = 200;  // Set desired width
+                int newHeight = 200; // Set desired height (or use scaled height)
+
+                QImage scaledImage = image.scaled(newWidth, newHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+                painter.drawImage(100, y + 100, scaledImage);
+                y += scaledImage.height() + 20; // Adjust spacing after the image
             }
         }
     }
-
     painter.end();
 }
-
 
 void MainWindow:: showCity(){
     ui->comboBox->addItem("Pune");
     ui->comboBox->addItem("Hyderabad");
 }
 
-
-
 void MainWindow::on_pushButton_2_clicked()
 {
     newWin= new Dialog(*data);
     newWin->show();
 }
-
-

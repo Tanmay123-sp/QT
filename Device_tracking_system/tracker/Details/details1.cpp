@@ -35,23 +35,23 @@ bool Details1::isOpen() const
 
 bool Details1::createTable()
 {
-        bool success = true;
-        QSqlQuery query;
-        query.prepare("CREATE TABLE DeviceTracker("
-                      "id INTEGER PRIMARY KEY, "
-                      "devicename TEXT, "
-                      "serialno TEXT, "
-                      "assignedto TEXT, "
-                      "location TEXT, "
-                      "imgpath TEXT"
-                      ");");
+    bool success = true;
+    QSqlQuery query;
+    query.prepare("CREATE TABLE DeviceTracker("
+                  "id INTEGER PRIMARY KEY, "
+                  "devicename TEXT, "
+                  "serialno TEXT, "
+                  "assignedto TEXT, "
+                  "location TEXT, "
+                  "imgpath TEXT"
+                  ");");
 
-        if (!query.exec())
-        {
-            qDebug() << "tracker already exist.";
-            success = false;
-        }
-        return success;
+    if (!query.exec())
+    {
+        qDebug() << "tracker already exist.";
+        success = false;
+    }
+    return success;
 }
 
 bool Details1::deletedata(const QString deviceName)
@@ -109,18 +109,8 @@ bool Details1::addData( const QString& deviceName, const QString& serialName, co
     {
         qDebug() << "add data failed: name cannot be empty";
     }
-
     return success;
 }
-
-// QVector<QString> Details1::exportCombo()
-// {
-//     QVector<QString> vec;
-//     for(auto it:trackMap){
-//         vec.push_back(it.first);
-//     }
-//     return vec;
-// }
 
 vector<QString> Details1::exportCombo()
 {
@@ -130,39 +120,29 @@ vector<QString> Details1::exportCombo()
         QString deviceName = it.key();
         vec.push_back(deviceName);
     }
-    qDebug()<<"hghfghf";
-
     return vec;
 }
 
-// void Details1::getMap()
-// {
-
-// }
-
 void Details1::exportData()
 {
-
-        QSqlQuery exportQuery;
-        exportQuery.prepare("SELECT * From DeviceTracker;");
-        if(exportQuery.exec())
+    QSqlQuery exportQuery;
+    exportQuery.prepare("SELECT * From DeviceTracker;");
+    if(exportQuery.exec())
+    {
+        while(exportQuery.next())
         {
-            while(exportQuery.next())
-            {
-                //QVector<std::pair<QString, std::pair<QString, std::pair<QString, QString>>>> v;
-                QString key = exportQuery.value(1).toString();  // Assuming the first column is the key
-                // Store data from each column in the vector
-                QString col1 = exportQuery.value(2).toString();  // Assuming the second column
-                QString col2 = exportQuery.value(3).toString();  // Assuming the third column
-                QString col3 = exportQuery.value(4).toString();  // Assuming the fourth column
-                QString col4 = exportQuery.value(5).toString();
+            //QVector<std::pair<QString, std::pair<QString, std::pair<QString, QString>>>> v;
+            QString key = exportQuery.value(1).toString();  // Assuming the first column is the key
+            // Store data from each column in the vector
+            QString col1 = exportQuery.value(2).toString();
+            QString col2 = exportQuery.value(3).toString();
+            QString col3 = exportQuery.value(4).toString();
+            QString col4 = exportQuery.value(5).toString();
 
-                qDebug()<<"data To MAp";
-                trackMap[key].push_back({col1,{col2,{col3 , col4}}});
-            }
+            qDebug()<<"data To Map";
+            trackMap[key].push_back({col1,{col2,{col3 , col4}}});
         }
-
-
+    }
 }
 
 void Details1::setMap(QVector<QString>v)

@@ -46,26 +46,26 @@ void Assign::add_user(){
 
 void Assign::on_pushButton_clicked()
 {
-   QString S_name = ui->comboBox_2->currentText();
-   QString u_name = ui->comboBox_3->currentText();
-   int Qty = ui->textEdit->toPlainText().toInt();
+    QString S_name = ui->comboBox_2->currentText();
+    QString u_name = ui->comboBox_3->currentText();
+    int Qty = ui->textEdit->toPlainText().toInt();
 
-   // auto it= newbookMap[S_name];
-   int totalQuantity = newbookMap[S_name].first;
-   qDebug() << "numbwers RWJENBD "<<S_name<<totalQuantity<<Qty;
+    // auto it= newbookMap[S_name];
+    int totalQuantity = newbookMap[S_name].first;
+    qDebug() << "numbwers RWJENBD "<<S_name<<totalQuantity<<Qty;
 
-   if(newbookMap.find(S_name) != newbookMap.end())
-   {
-       if(totalQuantity >= Qty){
-           qDebug() << "ygtgbvnhnbjgvgjncgn"<<totalQuantity;
+    if(newbookMap.find(S_name) != newbookMap.end())
+    {
+        if(totalQuantity >= Qty){
+            qDebug() << "ygtgbvnhnbjgvgjncgn"<<totalQuantity;
 
-           newbookMap[S_name].second[u_name]+=Qty;
-           qDebug()<<newbookMap[S_name].second[u_name];
-       }else{
-           QMessageBox::warning(nullptr, "Error","Error");
+            newbookMap[S_name].second[u_name]+=Qty;
+            qDebug()<<newbookMap[S_name].second[u_name];
+        }else{
+            QMessageBox::warning(nullptr, "Error","Error");
 
-       }
-   }
+        }
+    }
 }
 
 void Assign::on_radioButton_Tech_clicked()
@@ -98,4 +98,3 @@ void Assign::on_radioButton_NonTech_clicked()
         }
     }
 }
-
