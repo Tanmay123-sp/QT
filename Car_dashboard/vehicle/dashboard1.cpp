@@ -13,7 +13,6 @@ dashboard1::dashboard1(userModel LastUserObj,QVector<vehicleModel>getInfo,QWidge
     // totalKm=0;
     if(obj.getMode()=="Eco"){
         rpm1= 3000;
-
     }
     else{
         rpm1 = 6000;
@@ -30,8 +29,6 @@ dashboard1::dashboard1(userModel LastUserObj,QVector<vehicleModel>getInfo,QWidge
 
     connect(speedTimer,&QTimer::timeout,this,&dashboard1::SpeedLevel);
     speedTimer->start(3000);
-
-    // connect(ui->dial, &QDial::valueChanged, this, &dashboard1::updateSpeedometer);
     connect(kmTimer, &QTimer::timeout, this,&dashboard1::totalKmFun );
     kmTimer->start(3000);
     ui->leftLabel->setVisible(false);
@@ -72,7 +69,6 @@ void dashboard1::LastUserBG()
     }
 }
 
-//
 int dashboard1::getBattery()
 {
     return battery;
@@ -88,19 +84,11 @@ void dashboard1::setBgfromMain(QString user, QString color, QString mode)
     qDebug()<<styleSheet;
     this->setStyleSheet(styleSheet);
 }
-//qDebug()<<user<<"ggg"<<color<<mode;
-
-// int dashboard1::getEngineHrs()
-// {
-//     return totalEngineHrs;
-// }
-
 
 int dashboard1::calculateRPM(int speed)
 {
     qDebug()<<"calculate"<<speed;
-     return speed * 10;
-
+    return speed * 10;
 }
 
 void dashboard1::closeEvent(QCloseEvent *event)
@@ -108,13 +96,6 @@ void dashboard1::closeEvent(QCloseEvent *event)
     emit exportEngKm(totalEngineHrs,totalKm);
     QWidget:: closeEvent(event);
 }
-
-// void dashboard1::getUserValues(QString user)
-// {
-//     QString userName = user;
-//     qDebug()<<"user"<<userName;
-//     db1->addUser(userName);
-// }
 
 void dashboard1::BatteryLevel()
 {
@@ -132,7 +113,6 @@ void dashboard1::EngineHrs()
     totalEngineHrs++;
     ui->enginneLabel_2->setText(QString::number(totalEngineHrs));
     qDebug()<<"Engine hrs:"<<totalEngineHrs;
-
 }
 
 void dashboard1::SpeedLevel()
@@ -152,7 +132,6 @@ void dashboard1::SpeedLevel()
             speed+=20;
         }
         qDebug()<<"Speed :"<<speed;
-
     }
 }
 
@@ -161,13 +140,8 @@ void dashboard1::totalKmFun()
     // ui->totalKmLCD->show();
     ui->totalKmLCD->setDigitCount(7); // Display up to 6 digits
     // ui->totalKmLCD->setSegmentStyle(QLCDNumber::Flat);
-
-
-        totalKm +=1;
-
-        qDebug()<<"update km"<<totalKm;
-     // Convert speed from km/h to km/s
-
+    totalKm +=1;
+    qDebug()<<"update km"<<totalKm;
     // Update RPM based on the speed
     rpm = calculateRPM(speed);
     qDebug()<<"rpm"<<rpm;
@@ -182,18 +156,6 @@ void dashboard1::resetValues(int engineHrs,int totalKm1)
     totalKm = totalKm1;
     qDebug()<<"totalEn "<<totalEngineHrs<<" totlkm "<<totalKm;
 }
-
-// void dashboard1::on_toolButton_clicked()
-// {
-//     connect(leftTimer,&QTimer::timeout,this,&dashboard1::leftFun);
-//     leftTimer->start();
-// }
-
-// void dashboard1::leftFun()
-// {
-
-// }
-
 
 void dashboard1::on_leftButton_clicked()
 {
@@ -212,7 +174,6 @@ void dashboard1::on_leftButton_clicked()
 }
 void dashboard1::leftIndicator()
 {
-
     ui->leftLabel->setVisible(!ui->leftLabel->isVisible());
 }
 
