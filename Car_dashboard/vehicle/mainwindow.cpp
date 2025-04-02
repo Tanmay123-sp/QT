@@ -16,7 +16,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete dt1;
-
 }
 
 userModel MainWindow::getLastUserfromDP()
@@ -80,13 +79,6 @@ void MainWindow::timer2_fun()
         "color: black;" /* Text color */
         "padding: 15px");
 }
-
-// void MainWindow::on_pushButton_clicked()
-// {
-//     dt1->resetFun();
-//     qDebug()<<dt1->speed;
-// }
-
 
 void MainWindow::on_resetButton_clicked()
 {
