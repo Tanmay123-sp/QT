@@ -74,9 +74,9 @@ void MainWindow::timer1_fun()
 void MainWindow::timer2_fun()
 {
     ui->startButton->setStyleSheet(
-        "border-radius: 45px;" /* Half of the desired button size */
-        "background-color: green;" /* red color */
-        "color: black;" /* Text color */
+        "border-radius: 45px;"
+        "background-color: green;" 
+        "color: black;"
         "padding: 15px");
 }
 
