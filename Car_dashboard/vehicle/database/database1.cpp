@@ -37,32 +37,11 @@ bool database1::isOpen() const
     return myDB.isOpen();
 }
 
-// bool database1::createTable()
-// {
-//     bool success = true;
-//     QSqlQuery query;
-//     query.prepare("CREATE TABLE myDB("
-//                   "id INTEGER PRIMARY KEY, "
-//                   "engineHrs TEXT, "
-//                   "totalKm TEXT"
-//                   ");");
-
-//     if (!query.exec())
-//     {
-//         qDebug() << "tracker already exist.";
-//         success = false;
-//     }
-//     return success;
-// }
-
 bool database1::createTable()
 {
     bool success = true;
     QSqlQuery query;
 
-    // Create the first table
-
-    // Create the second table
     query.prepare("CREATE TABLE IF NOT EXISTS UserInfo("
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "user TEXT UNIQUE, "
@@ -127,12 +106,8 @@ userModel database1::retrieveUserInfoByVehicleUser() {
         }
 
         QSqlDatabase::database().commit();
-
         return LastUser;
-
     }
-
-
 
 bool database1::addUser(QString userName)
 {
@@ -152,22 +127,6 @@ bool database1::addUser(QString userName)
     }
     return success;
 }
-
-// void database1::updateVehicleDetails(QString user,int engineHrs,int totalKm)
-// {
-//     QSqlQuery query;
-//     query.prepare("INSERT INTO VehicleInfo(user,engineHrs,totalKm) VALUES (:user,:engineHrs,:totalKm)");
-//     query.bindValue(":user",user);
-//     query.bindValue(":engineHrs",engineHrs);
-//     query.bindValue(":totalKm",totalKm);
-//     if(query.exec())
-//     {
-//         qDebug()<<"user added Successfully";
-//     }
-//     else{
-//         qDebug()<<"Error adding Vehicle:"<<query.lastError().text();
-//     }
-// }
 
 bool database1::updateVehicleDetails( int engineHr, int totalkm) {
     QSqlQuery query;
@@ -230,8 +189,6 @@ bool database1::updateLastUserInfo(QString user)
     return success;
 }
 
-
-
 QVector<userModel> database1::retriveUserInfo()
 {
     QVector<userModel>userList;
@@ -253,9 +210,6 @@ QVector<userModel> database1::retriveUserInfo()
             // qDebug() << "User:" << user;
 
                 userList.push_back(user);
-
-            // u1.getuserName();
-
         }
         return userList;
 }
@@ -287,39 +241,6 @@ QVector<vehicleModel> database1::retriveVehicleInfo()
     }
     return vehicleList;
 }
-
-// bool database1::addData(const QString &user,const QString &engineHrs, const QString &totalKm)
-// {
-//     bool success = false;
-
-//     if (!engineHrs.isEmpty())
-//     {
-//         QSqlQuery queryAdd;
-//         queryAdd.prepare("INSERT INTO VehicleInfo (user, engineHrs,totalKm) "
-//                          "VALUES (:user, :engineHrs,:totalKm)");
-//         queryAdd.bindValue(":user", user);
-//         queryAdd.bindValue(":engineHrs", engineHrs);
-//         queryAdd.bindValue(":totalKm", totalKm);
-
-//         if(queryAdd.exec())
-//         {
-//             qDebug() <<"data added successfully";
-//             success = true;
-
-//         }
-//         else
-//         {
-//             qDebug() << "add data failed: " << queryAdd.lastError();
-//         }
-//     }
-//     else
-//     {
-//         qDebug() << "add data failed: name cannot be empty";
-//     }
-
-//     return success;
-// }
-
 
 int database1::getEngineHrs()
 {
