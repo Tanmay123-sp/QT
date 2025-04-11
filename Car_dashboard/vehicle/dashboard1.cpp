@@ -137,9 +137,7 @@ void dashboard1::SpeedLevel()
 
 void dashboard1::totalKmFun()
 {
-    // ui->totalKmLCD->show();
     ui->totalKmLCD->setDigitCount(7); // Display up to 6 digits
-    // ui->totalKmLCD->setSegmentStyle(QLCDNumber::Flat);
     totalKm +=1;
     qDebug()<<"update km"<<totalKm;
     // Update RPM based on the speed
